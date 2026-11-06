@@ -51,6 +51,9 @@ behavior on the label, so a rename touches copy only.
   account/community-scoped `groups:me` preference record. Messages groups remain
   independent. Records from before the label also list a `channels` placement
   array; it is ignored and dropped on the next workspace write.
+- Deleting a workspace tombstones its `me-section-<sha256(id)>` defaults record,
+  emptied and renamed, best effort after the groups write. If that write fails,
+  the record stays live but unreachable.
 - **Label only:** a private channel without `buzz.solo` is an ordinary Team
   channel, whatever its `about` text. No code reads the retired
   `Buzz session (buzz.sessions/v1)` marker, and there is no migration,
